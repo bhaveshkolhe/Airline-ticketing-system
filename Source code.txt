@@ -1,0 +1,170 @@
+import os
+import platform
+import pandas as pd
+import mysql.connector as sqltor
+def menuset(): #1
+import mysql.connector as sqltor
+mycon=sqltor.connect(host='localhost',user='root',passwd='mysql',database='bhavesh')
+cursor=mycon.cursor()
+print("AIR TICKET RESERVATION")
+print("enter 1:To enter the passenger data")
+print("enter 2:To view the classtype")
+print("enter 3:for ticket amount")
+print("enter 4:for viewing the food menu")
+print("enter 5:for food bill")
+print("enter 6:for complete amount")
+print("enter 7:for exit")
+userchoice=int(input("enter the option mentioned above : "))
+print("--------------------------------")
+if(userchoice == 1):
+registercust()
+elif(userchoice == 2):
+classtypeview()
+elif(userchoice == 3):
+ticketprice()
+elif(userchoice == 4):
+foodview()
+elif(userchoice == 5):
+foodbill()
+elif(userchoice == 6):
+completebill()
+elif(userchoice == 7):
+exit()
+else:
+print("enter the correct choice")
+menuset()
+def registercust(): #2
+mycon=sqltor.connect(host='localhost',user='root',passwd='mysql',database='bhavesh')
+cursor=mycon.cursor()
+L=[]
+name=input("enter the name:")
+L.append(name)
+jrdate=input("enter the jrdate:")
+L.append(jrdate)
+source=input("enter the source:")
+L.append(source)
+destination=input("enter the destination:")
+L.append(destination)
+cust=(L)
+q="insert into
+pdata(pname,jrdate,source,destination)values(%s,%s,%s,%s);"
+print("------------------")
+print("passenger data insertion completed")
+cursor.execute(q,cust)
+mycon.commit()
+def classtypeview(): #3
+mycon=sqltor.connect(host='localhost',user='root',passwd='mysql',dat
+abase='bhavesh')
+cursor=mycon.cursor()
+print("Do you want to see class type available:enter 1: for yes")
+ch=int(input("enter your choice"))
+if ch==1:
+sql="select * from classtype"
+cursor.execute(sql)
+rows=cursor.fetchall()
+for x in rows:
+print(x)
+def ticketprice(): #4
+print("We have the following class for you:")
+print("enter 1:type is first class for rs 4000 per person\-")
+print("enter 2: type is business class for rs 6000 per person\-")
+print("enter 3: type is economy for rs 2000 per person")
+x=int(input("enter the choice : "))
+n=int(input("enter no of passengers : "))
+if(x==1):
+print ("you have opted First class")
+h=4000*n
+print("your class rent is",h)
+elif (x==2):
+print ("you have opted Business class")
+h=6000*n
+print("your class rent is",h)
+elif (x==3):
+print ("you have opted Economy class")
+h=2000*n
+print("your rent is",h)
+else:
+print ("please choose a class type")
+5) def foodview(): #5
+mycon=sqltor.connect(host='localhost',user='root',passwd='mysql',dat
+abase='bhavesh')
+cursor=mycon.cursor()
+print("Do you want to see the food menu available:enter 1 for
+yes:")
+ch=int(input("enter your choice:"))
+if ch==1:
+sql="select * from food"
+cursor.execute(sql)
+rows=cursor.fetchall()
+for x in rows:
+print(x)
+6) def foodbill(): #6
+mycon=sqltor.connect(host='localhost',user='root',passwd='mysql',dat
+abase='bhavesh')
+cursor=mycon.cursor()
+print("Do you want to see the food menu available:enter 1: for
+yes")
+ch=int(input("enter your choice:"))
+if ch==1:
+sql="select * from food"
+cursor.execute(sql)
+rows=cursor.fetchall()
+for x in rows:
+print(x)
+print("Do you want to purchase from the above list:enter your
+choice :")
+print("---------------------------")
+d=int(input("enter your choice:"))
+if d==1:
+print("you have ordered tea")
+a=int(input("enter the quantity:"))
+s=20*a
+print("your amount for tea is:",s)
+elif d==2:
+print("you have ordered coffee")
+a=int(input("enter the quantity:"))
+s=30*a
+print("your amount for coffee is:",s)
+elif d==3:
+print("you have ordered noodles")
+a=int(input("enter the quantity:"))
+s=60*a
+print("your amount for noodles is:",s)
+elif d==4:
+print("you have ordered pasta")
+a=int(input("enter the quantity"))
+s=80*a
+print("your amount for pasta is:",s)
+elif d==5:
+print("you have ordered colddrink")
+a=int(input("enter the quantity:"))
+s=20*a
+print("your amount for colddrink is:",s)
+elif d==6:
+print("you have ordered sandwich")
+a=int(input("enter the quantity:"))
+s=50*a
+print("your amount for sandwich is:",s)
+else:
+print("please enter your choice from the menu")
+def completebill(): #7
+mycon=sqltor.connect(host='localhost',user='root',passwd='mysql',dat
+abase='bhavesh')
+cursor=mycon.cursor()
+L=[]
+name=input("enter the name:")
+L.append(name)
+t=int(input("enter the ticketbill:"))
+print("your ticketbill:",t)
+L.append(t)
+f=int(input("enter the foodbill:"))
+print("your foodbill:",f)
+L.append(f)
+y=(t+f)
+to=print("your totalbill:",(t+f))
+L.append(y)
+bill=(L)
+q="insert into
+bill(name,ticketbill,foodbill,totalbill)values(%s,%s,%s,%s)"
+cursor.execute(q,bill)
+mycon.commit()
